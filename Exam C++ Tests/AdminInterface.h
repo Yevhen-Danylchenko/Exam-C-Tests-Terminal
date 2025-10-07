@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <locale>
 
 #include "MyFuncAdmin.h"
 #include "Tests.h"
@@ -14,6 +15,8 @@ namespace AdminInter
 {
 	void adminMenu()
 	{
+		setlocale(LC_ALL, "Ukrainian");
+
 		std::string adminChoice = "y";
 
 		while (adminChoice == "y" || adminChoice == "Y")
