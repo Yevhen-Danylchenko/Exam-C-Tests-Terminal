@@ -1,11 +1,13 @@
-#pragma once
+ï»¿#pragma once
 
 #include <iostream>
 #include <string>
 #include "Tests.h"
 #include "sqlite3.h"
+#include <locale>
+#include <stdexcept>
 
-namespace MyFunctionsAdmin {
+namespace MyFunctionsAdmin {	
 
     std::string caesarEncrypt(const std::string& text, int shift) {
         std::string result;
@@ -46,12 +48,12 @@ namespace MyFunctionsAdmin {
         int exit = sqlite3_open(dbName.c_str(), &DB);
 
         if (exit != SQLITE_OK) {
-            std::cerr << "Íå âäàëîñÿ ñòâîðèòè àáî âiäêðèòè áàçó äàíèõ: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ ÑÑ‚Ð²Ð¾Ñ€Ð¸Ñ‚Ð¸ Ð°Ð±Ð¾ Ð²iÐ´ÐºÑ€Ð¸Ñ‚Ð¸ Ð±Ð°Ð·Ñƒ Ð´Ð°Ð½Ð¸Ñ…: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
         else {
-            std::cout << "Áàçó äàíèõ \"" << dbName << "\" óñïiøíî ñòâîðåíî àáî âiäêðèòî.\n";
+            std::cout << "Ð‘Ð°Ð·Ñƒ Ð´Ð°Ð½Ð¸Ñ… \"" << dbName << "\" ÑƒÑÐ¿iÑˆÐ½Ð¾ ÑÑ‚Ð²Ð¾Ñ€ÐµÐ½Ð¾ Ð°Ð±Ð¾ Ð²iÐ´ÐºÑ€Ð¸Ñ‚Ð¾.\n";
         }
 
         std::string sql = "CREATE TABLE IF NOT EXISTS Admin ("
@@ -63,11 +65,11 @@ namespace MyFunctionsAdmin {
         exit = sqlite3_exec(DB, sql.c_str(), nullptr, 0, &messageError);
 
         if (exit != SQLITE_OK) {
-            std::cerr << "Ïîìèëêà ïðè ñòâîðåííi òàáëèöi: " << messageError << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ ÑÑ‚Ð²Ð¾Ñ€ÐµÐ½Ð½i Ñ‚Ð°Ð±Ð»Ð¸Ñ†i: " << messageError << std::endl;
             sqlite3_free(messageError);
         }
         else {
-            std::cout << "Òàáëèöþ Admin óñïiøíî ñòâîðåíî àáî âîíà âæå iñíóº.\n";
+            std::cout << "Ð¢Ð°Ð±Ð»Ð¸Ñ†ÑŽ Admin ÑƒÑÐ¿iÑˆÐ½Ð¾ ÑÑ‚Ð²Ð¾Ñ€ÐµÐ½Ð¾ Ð°Ð±Ð¾ Ð²Ð¾Ð½Ð° Ð²Ð¶Ðµ iÑÐ½ÑƒÑ”.\n";
         }
 
         sqlite3_close(DB);
@@ -78,7 +80,7 @@ namespace MyFunctionsAdmin {
         int exit = sqlite3_open(dbName.c_str(), &DB);
 
         if (exit != SQLITE_OK) {
-            std::cerr << "Íå âäàëîñÿ ñòâîðèòè àáî âiäêðèòè áàçó äàíèõ: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ ÑÑ‚Ð²Ð¾Ñ€Ð¸Ñ‚Ð¸ Ð°Ð±Ð¾ Ð²iÐ´ÐºÑ€Ð¸Ñ‚Ð¸ Ð±Ð°Ð·Ñƒ Ð´Ð°Ð½Ð¸Ñ…: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -95,11 +97,11 @@ namespace MyFunctionsAdmin {
         exit = sqlite3_exec(DB, sql.c_str(), nullptr, 0, &messageError);
 
         if (exit != SQLITE_OK) {
-            std::cerr << "Ïîìèëêà ïðè ñòâîðåííi òàáëèöi: " << messageError << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ ÑÑ‚Ð²Ð¾Ñ€ÐµÐ½Ð½i Ñ‚Ð°Ð±Ð»Ð¸Ñ†i: " << messageError << std::endl;
             sqlite3_free(messageError);
         }
         else {
-            std::cout << "Òàáëèöþ User óñïiøíî ñòâîðåíî àáî âîíà âæå iñíóº.\n";
+            std::cout << "Ð¢Ð°Ð±Ð»Ð¸Ñ†ÑŽ User ÑƒÑÐ¿iÑˆÐ½Ð¾ ÑÑ‚Ð²Ð¾Ñ€ÐµÐ½Ð¾ Ð°Ð±Ð¾ Ð²Ð¾Ð½Ð° Ð²Ð¶Ðµ iÑÐ½ÑƒÑ”.\n";
         }
 
         sqlite3_close(DB);
@@ -110,7 +112,7 @@ namespace MyFunctionsAdmin {
         int exit = sqlite3_open(dbName.c_str(), &DB);
 
         if (exit != SQLITE_OK) {
-            std::cerr << "Íå âäàëîñÿ âiäêðèòè áàçó äàíèõ: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ Ð²iÐ´ÐºÑ€Ð¸Ñ‚Ð¸ Ð±Ð°Ð·Ñƒ Ð´Ð°Ð½Ð¸Ñ…: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -119,7 +121,7 @@ namespace MyFunctionsAdmin {
         sqlite3_stmt* checkStmt;
         exit = sqlite3_prepare_v2(DB, checkSQL.c_str(), -1, &checkStmt, nullptr);
         if (exit != SQLITE_OK) {
-            std::cerr << "Ïîìèëêà ïðè ïåðåâiðöi òàáëèöi: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ Ð¿ÐµÑ€ÐµÐ²iÑ€Ñ†i Ñ‚Ð°Ð±Ð»Ð¸Ñ†i: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -131,7 +133,7 @@ namespace MyFunctionsAdmin {
         sqlite3_finalize(checkStmt);
 
         if (adminCount > 0) {
-            std::cout << "Àäìiíiñòðàòîð âæå iñíóº. Ñòâîðåííÿ íîâîãî íå äîçâîëåíî.\n";
+            std::cout << "ÐÐ´Ð¼iÐ½iÑÑ‚Ñ€Ð°Ñ‚Ð¾Ñ€ Ð²Ð¶Ðµ iÑÐ½ÑƒÑ”. Ð¡Ñ‚Ð²Ð¾Ñ€ÐµÐ½Ð½Ñ Ð½Ð¾Ð²Ð¾Ð³Ð¾ Ð½Ðµ Ð´Ð¾Ð·Ð²Ð¾Ð»ÐµÐ½Ð¾.\n";
             sqlite3_close(DB);
             return;
         }
@@ -143,7 +145,7 @@ namespace MyFunctionsAdmin {
         sqlite3_stmt* stmt;
         exit = sqlite3_prepare_v2(DB, insertSQL.c_str(), -1, &stmt, nullptr);
         if (exit != SQLITE_OK) {
-            std::cerr << "Ïîìèëêà ïðè ïiäãîòîâöi çàïèòó: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ Ð¿iÐ´Ð³Ð¾Ñ‚Ð¾Ð²Ñ†i Ð·Ð°Ð¿Ð¸Ñ‚Ñƒ: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -153,10 +155,10 @@ namespace MyFunctionsAdmin {
 
         exit = sqlite3_step(stmt);
         if (exit != SQLITE_DONE) {
-            std::cerr << "Ïîìèëêà ïðè âèêîíàííi çàïèòó: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ Ð²Ð¸ÐºÐ¾Ð½Ð°Ð½Ð½i Ð·Ð°Ð¿Ð¸Ñ‚Ñƒ: " << sqlite3_errmsg(DB) << std::endl;
         }
         else {
-            std::cout << "Àäìiíiñòðàòîðà óñïiøíî äîäàíî.\n";
+            std::cout << "ÐÐ´Ð¼iÐ½iÑÑ‚Ñ€Ð°Ñ‚Ð¾Ñ€Ð° ÑƒÑÐ¿iÑˆÐ½Ð¾ Ð´Ð¾Ð´Ð°Ð½Ð¾.\n";
         }
 
         sqlite3_finalize(stmt);
@@ -167,7 +169,7 @@ namespace MyFunctionsAdmin {
         sqlite3* DB;
         int exit = sqlite3_open(dbName.c_str(), &DB);
         if (exit != SQLITE_OK) {
-            std::cerr << "Íå âäàëîñÿ âiäêðèòè áàçó äàíèõ: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ Ð²iÐ´ÐºÑ€Ð¸Ñ‚Ð¸ Ð±Ð°Ð·Ñƒ Ð´Ð°Ð½Ð¸Ñ…: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -177,7 +179,7 @@ namespace MyFunctionsAdmin {
         sqlite3_stmt* stmt;
         exit = sqlite3_prepare_v2(DB, updateSQL.c_str(), -1, &stmt, nullptr);
         if (exit != SQLITE_OK) {
-            std::cerr << "Ïîìèëêà ïðè ïiäãîòîâöi çàïèòó: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ Ð¿iÐ´Ð³Ð¾Ñ‚Ð¾Ð²Ñ†i Ð·Ð°Ð¿Ð¸Ñ‚Ñƒ: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -185,10 +187,10 @@ namespace MyFunctionsAdmin {
         sqlite3_bind_text(stmt, 2, encryptedPassword.c_str(), -1, SQLITE_STATIC);
         exit = sqlite3_step(stmt);
         if (exit != SQLITE_DONE) {
-            std::cerr << "Ïîìèëêà ïðè âèêîíàííi çàïèòó: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ Ð²Ð¸ÐºÐ¾Ð½Ð°Ð½Ð½i Ð·Ð°Ð¿Ð¸Ñ‚Ñƒ: " << sqlite3_errmsg(DB) << std::endl;
         }
         else {
-            std::cout << "Äàíi àäìiíiñòðàòîðà óñïiøíî îíîâëåíî.\n";
+            std::cout << "Ð”Ð°Ð½i Ð°Ð´Ð¼iÐ½iÑÑ‚Ñ€Ð°Ñ‚Ð¾Ñ€Ð° ÑƒÑÐ¿iÑˆÐ½Ð¾ Ð¾Ð½Ð¾Ð²Ð»ÐµÐ½Ð¾.\n";
         }
         sqlite3_finalize(stmt);
         sqlite3_close(DB);
@@ -198,7 +200,7 @@ namespace MyFunctionsAdmin {
         sqlite3* DB;
         int exit = sqlite3_open(dbName.c_str(), &DB);
         if (exit != SQLITE_OK) {
-            std::cerr << "Íå âäàëîñÿ âiäêðèòè áàçó äàíèõ: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ Ð²iÐ´ÐºÑ€Ð¸Ñ‚Ð¸ Ð±Ð°Ð·Ñƒ Ð´Ð°Ð½Ð¸Ñ…: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -209,7 +211,7 @@ namespace MyFunctionsAdmin {
         sqlite3_stmt* checkStmt;
         exit = sqlite3_prepare_v2(DB, checkSQL.c_str(), -1, &checkStmt, nullptr);
         if (exit != SQLITE_OK) {
-            std::cerr << "Ïîìèëêà ïðè ïåðåâiðöi ëîãiíà: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ Ð¿ÐµÑ€ÐµÐ²iÑ€Ñ†i Ð»Ð¾Ð³iÐ½Ð°: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -222,7 +224,7 @@ namespace MyFunctionsAdmin {
         sqlite3_finalize(checkStmt);
 
         if (userCount > 0) {
-            std::cout << "Êîðèñòóâà÷ ç òàêèì ëîãiíîì âæå iñíóº. Ðåºñòðàöiÿ íåìîæëèâà.\n";
+            std::cout << "ÐšÐ¾Ñ€Ð¸ÑÑ‚ÑƒÐ²Ð°Ñ‡ Ð· Ñ‚Ð°ÐºÐ¸Ð¼ Ð»Ð¾Ð³iÐ½Ð¾Ð¼ Ð²Ð¶Ðµ iÑÐ½ÑƒÑ”. Ð ÐµÑ”ÑÑ‚Ñ€Ð°Ñ†iÑ Ð½ÐµÐ¼Ð¾Ð¶Ð»Ð¸Ð²Ð°.\n";
             sqlite3_close(DB);
             return;
         }
@@ -233,7 +235,7 @@ namespace MyFunctionsAdmin {
         sqlite3_stmt* stmt;
         exit = sqlite3_prepare_v2(DB, insertSQL.c_str(), -1, &stmt, nullptr);
         if (exit != SQLITE_OK) {
-            std::cerr << "Ïîìèëêà ïðè ïiäãîòîâöi çàïèòó: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ Ð¿iÐ´Ð³Ð¾Ñ‚Ð¾Ð²Ñ†i Ð·Ð°Ð¿Ð¸Ñ‚Ñƒ: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -246,10 +248,10 @@ namespace MyFunctionsAdmin {
 
         exit = sqlite3_step(stmt);
         if (exit != SQLITE_DONE) {
-            std::cerr << "Ïîìèëêà ïðè âèêîíàííi çàïèòó: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ Ð²Ð¸ÐºÐ¾Ð½Ð°Ð½Ð½i Ð·Ð°Ð¿Ð¸Ñ‚Ñƒ: " << sqlite3_errmsg(DB) << std::endl;
         }
         else {
-            std::cout << "Êîðèñòóâà÷à óñïiøíî çàðåºñòðîâàíî.\n";
+            std::cout << "ÐšÐ¾Ñ€Ð¸ÑÑ‚ÑƒÐ²Ð°Ñ‡Ð° ÑƒÑÐ¿iÑˆÐ½Ð¾ Ð·Ð°Ñ€ÐµÑ”ÑÑ‚Ñ€Ð¾Ð²Ð°Ð½Ð¾.\n";
         }
 
         sqlite3_finalize(stmt);
@@ -264,7 +266,7 @@ namespace MyFunctionsAdmin {
         sqlite3* DB;
         int exit = sqlite3_open(dbName.c_str(), &DB);
         if (exit != SQLITE_OK) {
-            std::cerr << "Íå âäàëîñÿ âiäêðèòè áàçó äàíèõ: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ Ð²iÐ´ÐºÑ€Ð¸Ñ‚Ð¸ Ð±Ð°Ð·Ñƒ Ð´Ð°Ð½Ð¸Ñ…: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -274,7 +276,7 @@ namespace MyFunctionsAdmin {
         sqlite3_stmt* stmt;
         exit = sqlite3_prepare_v2(DB, updateSQL.c_str(), -1, &stmt, nullptr);
         if (exit != SQLITE_OK) {
-            std::cerr << "Ïîìèëêà ïðè ïiäãîòîâöi çàïèòó: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ Ð¿iÐ´Ð³Ð¾Ñ‚Ð¾Ð²Ñ†i Ð·Ð°Ð¿Ð¸Ñ‚Ñƒ: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -286,10 +288,10 @@ namespace MyFunctionsAdmin {
         sqlite3_bind_int(stmt, 6, userID);
         exit = sqlite3_step(stmt);
         if (exit != SQLITE_DONE) {
-            std::cerr << "Ïîìèëêà ïðè âèêîíàííi çàïèòó: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ Ð²Ð¸ÐºÐ¾Ð½Ð°Ð½Ð½i Ð·Ð°Ð¿Ð¸Ñ‚Ñƒ: " << sqlite3_errmsg(DB) << std::endl;
         }
         else {
-            std::cout << "Äàíi êîðèñòóâà÷à óñïiøíî îíîâëåíî.\n";
+            std::cout << "Ð”Ð°Ð½i ÐºÐ¾Ñ€Ð¸ÑÑ‚ÑƒÐ²Ð°Ñ‡Ð° ÑƒÑÐ¿iÑˆÐ½Ð¾ Ð¾Ð½Ð¾Ð²Ð»ÐµÐ½Ð¾.\n";
         }
         sqlite3_finalize(stmt);
         sqlite3_close(DB);
@@ -299,7 +301,7 @@ namespace MyFunctionsAdmin {
         sqlite3* DB;
         int exit = sqlite3_open(dbName.c_str(), &DB);
         if (exit != SQLITE_OK) {
-            std::cerr << "Íå âäàëîñÿ âiäêðèòè áàçó äàíèõ: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ Ð²iÐ´ÐºÑ€Ð¸Ñ‚Ð¸ Ð±Ð°Ð·Ñƒ Ð´Ð°Ð½Ð¸Ñ…: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -307,27 +309,29 @@ namespace MyFunctionsAdmin {
         sqlite3_stmt* stmt;
         exit = sqlite3_prepare_v2(DB, deleteSQL.c_str(), -1, &stmt, nullptr);
         if (exit != SQLITE_OK) {
-            std::cerr << "Ïîìèëêà ïðè ïiäãîòîâöi çàïèòó: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ Ð¿iÐ´Ð³Ð¾Ñ‚Ð¾Ð²Ñ†i Ð·Ð°Ð¿Ð¸Ñ‚Ñƒ: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
         sqlite3_bind_int(stmt, 1, userID);
         exit = sqlite3_step(stmt);
         if (exit != SQLITE_DONE) {
-            std::cerr << "Ïîìèëêà ïðè âèêîíàííi çàïèòó: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ Ð²Ð¸ÐºÐ¾Ð½Ð°Ð½Ð½i Ð·Ð°Ð¿Ð¸Ñ‚Ñƒ: " << sqlite3_errmsg(DB) << std::endl;
         }
         else {
-            std::cout << "Êîðèñòóâà÷à óñïiøíî âèäàëåíî.\n";
+            std::cout << "ÐšÐ¾Ñ€Ð¸ÑÑ‚ÑƒÐ²Ð°Ñ‡Ð° ÑƒÑÐ¿iÑˆÐ½Ð¾ Ð²Ð¸Ð´Ð°Ð»ÐµÐ½Ð¾.\n";
         }
         sqlite3_finalize(stmt);
         sqlite3_close(DB);
     }
 
     void createTestsTable(const std::string& dbName) {
+        setlocale(LC_ALL, "Ukrainian");
+
         sqlite3* DB;
         int exit = sqlite3_open(dbName.c_str(), &DB);
         if (exit != SQLITE_OK) {
-            std::cerr << "Íå âäàëîñÿ ñòâîðèòè àáî âiäêðèòè áàçó äàíèõ: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ ÑÑ‚Ð²Ð¾Ñ€Ð¸Ñ‚Ð¸ Ð°Ð±Ð¾ Ð²iÐ´ÐºÑ€Ð¸Ñ‚Ð¸ Ð±Ð°Ð·Ñƒ Ð´Ð°Ð½Ð¸Ñ…: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -344,20 +348,22 @@ namespace MyFunctionsAdmin {
         char* messageError = nullptr;
         exit = sqlite3_exec(DB, sql.c_str(), nullptr, 0, &messageError);
         if (exit != SQLITE_OK) {
-            std::cerr << "Ïîìèëêà ïðè ñòâîðåííi òàáëèöi: " << messageError << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ ÑÑ‚Ð²Ð¾Ñ€ÐµÐ½Ð½i Ñ‚Ð°Ð±Ð»Ð¸Ñ†i: " << messageError << std::endl;
             sqlite3_free(messageError);
         }
         else {
-            std::cout << "Òàáëèöþ Tests óñïiøíî ñòâîðåíî àáî âîíà âæå iñíóº.\n";
+            std::cout << "Ð¢Ð°Ð±Ð»Ð¸Ñ†ÑŽ Tests ÑƒÑÐ¿iÑˆÐ½Ð¾ ÑÑ‚Ð²Ð¾Ñ€ÐµÐ½Ð¾ Ð°Ð±Ð¾ Ð²Ð¾Ð½Ð° Ð²Ð¶Ðµ iÑÐ½ÑƒÑ”.\n";
         }
         sqlite3_close(DB);
 	}
 
     void adminAddTestQuestion(const std::string& dbName, const std::string& category, const std::string& subCategory, const std::string& question, const std::string& option1, const std::string& option2, const std::string& option3, const std::string& option4, int correctAnswer) {
+        setlocale(LC_ALL, "Ukrainian");
+        
         sqlite3* DB;
         int exit = sqlite3_open(dbName.c_str(), &DB);
         if (exit != SQLITE_OK) {
-            std::cerr << "Íå âäàëîñÿ âiäêðèòè áàçó äàíèõ: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ Ð²iÐ´ÐºÑ€Ð¸Ñ‚Ð¸ Ð±Ð°Ð·Ñƒ Ð´Ð°Ð½Ð¸Ñ…: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -365,30 +371,34 @@ namespace MyFunctionsAdmin {
         sqlite3_stmt* stmt;
         exit = sqlite3_prepare_v2(DB, insertSQL.c_str(), -1, &stmt, nullptr);
         if (exit != SQLITE_OK) {
-            std::cerr << "Ïîìèëêà ïðè ïiäãîòîâöi çàïèòó: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ Ð¿iÐ´Ð³Ð¾Ñ‚Ð¾Ð²Ñ†i Ð·Ð°Ð¿Ð¸Ñ‚Ñƒ: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
-        sqlite3_bind_text(stmt, 1, category.c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_text(stmt, 2, subCategory.c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_text(stmt, 3, question.c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_text(stmt, 4, option1.c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_text(stmt, 5, option2.c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_text(stmt, 6, option3.c_str(), -1, SQLITE_STATIC);
-        sqlite3_bind_text(stmt, 7, option4.c_str(), -1, SQLITE_STATIC);
+
+        sqlite3_bind_text(stmt, 1, category.c_str(), -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(stmt, 2, subCategory.c_str(), -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(stmt, 3, question.c_str(), -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(stmt, 4, option1.c_str(), -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(stmt, 5, option2.c_str(), -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(stmt, 6, option3.c_str(), -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(stmt, 7, option4.c_str(), -1, SQLITE_TRANSIENT);
         sqlite3_bind_int(stmt, 8, correctAnswer);
         exit = sqlite3_step(stmt);
         if (exit != SQLITE_DONE) {
-            std::cerr << "Ïîìèëêà ïðè âèêîíàííi çàïèòó: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ Ð²Ð¸ÐºÐ¾Ð½Ð°Ð½Ð½i Ð·Ð°Ð¿Ð¸Ñ‚Ñƒ: " << sqlite3_errmsg(DB) << std::endl;
         }
         else {
-            std::cout << "Ïèòàííÿ óñïiøíî äîäàíî äî òåñòiâ.\n";
-        }
+            std::cout << "ÐŸÐ¸Ñ‚Ð°Ð½Ð½Ñ ÑƒÑÐ¿iÑˆÐ½Ð¾ Ð´Ð¾Ð´Ð°Ð½Ð¾ Ð´Ð¾ Ñ‚ÐµÑÑ‚iÐ².\n";
+        } 
+		
         sqlite3_finalize(stmt);
         sqlite3_close(DB);
 	}
 
     void addTestToDatabase(const std::string& dbName, const Test& test) {
+        setlocale(LC_ALL, "Ukrainian");
+
         for (const auto& question : test.getQuestions()) {
             adminAddTestQuestion(dbName, test.getCategory(), test.getSubCategory(), question.text, question.options[0], question.options[1], question.options[2], question.options[3], question.correct_answer);
         }
@@ -398,7 +408,7 @@ namespace MyFunctionsAdmin {
         sqlite3* DB;
         int exit = sqlite3_open(dbName.c_str(), &DB);
         if (exit != SQLITE_OK) {
-            std::cerr << "Íå âäàëîñÿ ñòâîðèòè àáî âiäêðèòè áàçó äàíèõ: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ ÑÑ‚Ð²Ð¾Ñ€Ð¸Ñ‚Ð¸ Ð°Ð±Ð¾ Ð²iÐ´ÐºÑ€Ð¸Ñ‚Ð¸ Ð±Ð°Ð·Ñƒ Ð´Ð°Ð½Ð¸Ñ…: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -411,11 +421,11 @@ namespace MyFunctionsAdmin {
         char* messageError = nullptr;
         exit = sqlite3_exec(DB, sql.c_str(), nullptr, 0, &messageError);
         if (exit != SQLITE_OK) {
-            std::cerr << "Ïîìèëêà ïðè ñòâîðåííi òàáëèöi: " << messageError << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ ÑÑ‚Ð²Ð¾Ñ€ÐµÐ½Ð½i Ñ‚Ð°Ð±Ð»Ð¸Ñ†i: " << messageError << std::endl;
             sqlite3_free(messageError);
         }
         else {
-            std::cout << "Òàáëèöþ TestResults óñïiøíî ñòâîðåíî àáî âîíà âæå iñíóº.\n";
+            std::cout << "Ð¢Ð°Ð±Ð»Ð¸Ñ†ÑŽ TestResults ÑƒÑÐ¿iÑˆÐ½Ð¾ ÑÑ‚Ð²Ð¾Ñ€ÐµÐ½Ð¾ Ð°Ð±Ð¾ Ð²Ð¾Ð½Ð° Ð²Ð¶Ðµ iÑÐ½ÑƒÑ”.\n";
         }
         sqlite3_close(DB);
     }
@@ -424,7 +434,7 @@ namespace MyFunctionsAdmin {
         sqlite3* DB;
         int exit = sqlite3_open(dbName.c_str(), &DB);
         if (exit != SQLITE_OK) {
-            std::cerr << "Íå âäàëîñÿ âiäêðèòè áàçó äàíèõ: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐÐµ Ð²Ð´Ð°Ð»Ð¾ÑÑ Ð²iÐ´ÐºÑ€Ð¸Ñ‚Ð¸ Ð±Ð°Ð·Ñƒ Ð´Ð°Ð½Ð¸Ñ…: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
@@ -432,19 +442,19 @@ namespace MyFunctionsAdmin {
         sqlite3_stmt* stmt;
         exit = sqlite3_prepare_v2(DB, selectSQL.c_str(), -1, &stmt, nullptr);
         if (exit != SQLITE_OK) {
-            std::cerr << "Ïîìèëêà ïðè ïiäãîòîâöi çàïèòó: " << sqlite3_errmsg(DB) << std::endl;
+            std::cerr << "ÐŸÐ¾Ð¼Ð¸Ð»ÐºÐ° Ð¿Ñ€Ð¸ Ð¿iÐ´Ð³Ð¾Ñ‚Ð¾Ð²Ñ†i Ð·Ð°Ð¿Ð¸Ñ‚Ñƒ: " << sqlite3_errmsg(DB) << std::endl;
             sqlite3_close(DB);
             return;
         }
-        std::cout << "Ðåçóëüòàòè òåñòóâàííÿ:\n";
+        std::cout << "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð¸ Ñ‚ÐµÑÑ‚ÑƒÐ²Ð°Ð½Ð½Ñ:\n";
         while (sqlite3_step(stmt) == SQLITE_ROW) {
             std::string login = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
             std::string testName = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
             int correctAnswers = sqlite3_column_int(stmt, 2);
             double score = sqlite3_column_double(stmt, 3);
-            std::cout << "Ëîãií: " << login << ", Íàçâà òåñòó: " << testName
-                << ", Êiëüêiñòü ïðàâèëüíèõ âiäïîâiäåé: " << correctAnswers
-                << ", Îöiíêà: " << score << "%\n";
+            std::cout << "Ð›Ð¾Ð³iÐ½: " << login << ", ÐÐ°Ð·Ð²Ð° Ñ‚ÐµÑÑ‚Ñƒ: " << testName
+                << ", ÐšiÐ»ÑŒÐºiÑÑ‚ÑŒ Ð¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ð¸Ñ… Ð²iÐ´Ð¿Ð¾Ð²iÐ´ÐµÐ¹: " << correctAnswers
+                << ", ÐžÑ†iÐ½ÐºÐ°: " << score << "%\n";
         }
         sqlite3_finalize(stmt);
         sqlite3_close(DB);

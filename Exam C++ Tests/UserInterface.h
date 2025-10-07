@@ -26,16 +26,15 @@ namespace UserInter
 			switch (option)
 			{
 			case 1:
-				// Створити акаунт
 			{
 				std::string login, password, fullName, address, phone;
-				int shift = 5; // Зсув для шифрування Цезаря
+				int shift = 5; 
 				std::cout << "Введiть логiн користувача: ";
 				std::cin >> login;
 				std::cout << "Введiть пароль користувача: ";
 				std::cin >> password;
 				std::cout << "Введiть повне iм'я користувача: ";
-				std::cin.ignore(); // Очистити буфер вводу
+				std::cin.ignore(); 
 				std::getline(std::cin, fullName);
 				std::cout << "Введiть адресу користувача: ";
 				std::getline(std::cin, address);
@@ -46,11 +45,9 @@ namespace UserInter
 			}
 			break;
 			case 2:
-				// Пройти тест
 				userTakeTest("exam_tests.db");
 				break;
 			case 0:
-				// Вийти
 				std::cout << "Вихiд з меню користувача.\n";
 				return;
 			default:

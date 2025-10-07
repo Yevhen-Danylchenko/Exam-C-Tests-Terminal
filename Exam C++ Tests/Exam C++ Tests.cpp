@@ -27,15 +27,12 @@ int main()
 		switch (option)
 		{
 		case 1:
-			// Меню Адміністратора
 			adminMenu();
 			break;
 		case 2:
-			// Меню Користувача
 			userMenu();
 			break;
 		case 0:
-			// Вийти
 			std::cout << "Вихiд з програми.\n";
 			return 0;
 		default:
